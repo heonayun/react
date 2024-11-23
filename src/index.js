@@ -4,11 +4,26 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// 리덕스를 추가하는 로직
+import {legacy_createStore as createStore} from 'redux'
+import {devToolsEnhancer} from 'redux-devtools-extension'
+import {Provider} from 'react-redux'
+import route from './routes/modules/route';
+
+import {BrowserRouter, Route} from 'react-router-dom'
+import { RouteProvider } from './context/RouteContext';
+
+const store =createStore(route, devToolsEnhancer())
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <>
+    {/* <BrowserRouter> */}
+      <Provider store={store}>
+        <App />
+      </Provider>
+    {/* </BrowserRouter> */}
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function
